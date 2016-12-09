@@ -11,6 +11,8 @@ import project.model.Owner;
 import project.model.OwnerRepository;
 import project.service.OwnerService;
 
+import javax.validation.Valid;
+
 
 /**
  * Created by Наиль on 23.11.2016.
@@ -31,9 +33,9 @@ public class OwnerController {
     @ResponseBody
     //(requestbody)
     //response eintity
-    public void saveOwner(@RequestBody String firstName,@RequestBody String lastName,@RequestBody String address,@RequestBody String number){
+    public void saveOwner(@Valid @RequestBody Owner owner){
         try{
-            ownerService.createOwner(firstName, lastName, address, number);
+            ownerService.createOwner(owner.getFirstName(), owner.getLastName(), owner.getAddress(), owner.getPhoneNumber());
             log.info("User Created");
         }catch(Exception e){
             System.out.println(e.toString());
@@ -41,9 +43,9 @@ public class OwnerController {
         }
     }
 
-    @RequestMapping("/delete-owner")
+    @RequestMapping(path = "/delete-owner", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteOwner(Long id){
+    public void deleteOwner(@Valid @RequestBody Long id){
         try{
             ownerService.removeOwner(id);
             log.info("Owner with id = " + id + "deleted");
@@ -53,19 +55,19 @@ public class OwnerController {
         }
     }
 
-    @RequestMapping("/update-owner")
+    @RequestMapping(path = "/update-owner", method = RequestMethod.PUT)
     @ResponseBody
-    public void updateOwner(Long id, String firstName, String lastName, String address, String phoneNumber){
+    public void updateOwner(@Valid @RequestBody Owner owner){
         try{
-            ownerService.updateOwner(id, firstName, lastName, address, phoneNumber);
-            log.info("Owner with id = " + id + "updated");
+            ownerService.updateOwner(owner.getId(), owner.getFirstName(), owner.getLastName(), owner.getAddress(), owner.getPhoneNumber());
+            log.info("Owner with id = " + owner.getId() + "updated");
         }catch(Exception e){
             System.out.println(e.toString());
             log.info("Error while updating | " + e.toString());
         }
     }
 
-    /*@RequestMapping("find-by-phone")
+    @RequestMapping("/find-by-phone")
     @ResponseBody
     public String getByPhone(String phone){
         String result = null;
@@ -93,6 +95,6 @@ public class OwnerController {
             log.info("Error while extracting " + e.toString());
         }
         return result;
-    }*/
+    }
 
 }
