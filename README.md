@@ -1,4 +1,5 @@
 # ncproject
+#### Рабочий только Owner!
 ##### Запрос на создание записи по url: http://localhost:8080/create-owner
 ###### body: { "firstName" : "Frodo", "lastName" : "Baggins", "address" : "Mordor", "phoneNumber" : "13109" }
 ###### body: { "firstName" : "Ivan", "lastName" : "Ivanovich", "address" : "Ivanovskaya", "phoneNumber" : "13110" }
