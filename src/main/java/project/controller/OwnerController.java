@@ -29,7 +29,7 @@ public class OwnerController {
         this.ownerService = ownerService;
     }
 
-    @RequestMapping(path = "/create-owner", method = RequestMethod.POST)  //POST GET
+    @RequestMapping(path = "/owner", method = RequestMethod.POST)  //POST GET
     @ResponseBody
     //(requestbody)
     //response eintity
@@ -43,9 +43,9 @@ public class OwnerController {
         }
     }
 
-    @RequestMapping(path = "/delete-owner", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteOwner(@Valid @RequestBody Long id){
+    public void deleteOwner(Long id){
         try{
             ownerService.removeOwner(id);
             log.info("Owner with id = " + id + "deleted");
